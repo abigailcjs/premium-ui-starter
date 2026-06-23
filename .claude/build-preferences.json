@@ -1,0 +1,4 @@
+{
+  "mode": "guided",
+  "_comment": "guided = Claude proposes a few options at each build step and you pick; auto = Claude picks sensible defaults and moves fast. Change here or say 'switch to guided/auto'. Used by the guided-build skill."
+}

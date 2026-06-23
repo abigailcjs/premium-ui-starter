@@ -2,6 +2,52 @@
 
 A reusable, premium-grade UI starter — opinionated, official-first, and pre-wired to be driven by Claude Code. Clone it (or use it as a template) and start building polished React UI immediately.
 
+> **New to coding?** Just hand this repo to Claude Code and say *"help me build something"* (or run **`/build`**). The bundled **guided-build skill** walks you through it and **proposes a few options at each step for you to pick** — it doesn't run off and decide for you. See **[GETTING-STARTED.md](./GETTING-STARTED.md)**.
+
+## Guided Build — Claude proposes, you pick
+
+The repo ships a Claude Code skill (`.claude/skills/guided-build`) that turns Claude
+into a step-by-step **build coach**. Open the repo in Claude Code and it offers, at
+every decision, **2–4 concrete options with quick trade-offs** — what to build,
+sections, look & feel, components, copy, motion — and waits for your choice before
+building.
+
+A persistent **build mode** (in `.claude/build-preferences.json`) controls this for
+*all future builds*:
+
+- **Guided** (default) — always propose options and let you pick.
+- **Auto** — pick sensible defaults and move fast, pausing only on big decisions.
+
+Switch anytime by saying *"switch to guided/auto"*. A `SessionStart` hook reads the
+mode each session so the behavior sticks. Commands: **`/build`** (start the
+walkthrough), **`/setup`** (just look & feel), **`/new-coder`** (gentle orientation).
+
+## Setup Studio — the visual look & feel picker
+
+For the "look & feel" step, guided-build can hand off to **Setup Studio**: an
+in-app, point-and-click way to choose the same options visually, previewed live
+(or pick them in chat — your call). It covers:
+
+- **Fonts & type** — heading + body pairings.
+- **Color & theme** — accent color and light/dark.
+- **Corners & spacing** — corner roundness and density.
+- **Motion & scroll** — animation feel, reveal-on-scroll, smooth scroll.
+
+It **opens automatically on first run** (re-open anytime from the ✨ wand button;
+opt into "show every launch" on the last step). Pressing **Save** writes your
+choices to `src/studio/studio.config.json` and regenerates
+`src/styles/theme.generated.css` via a dev-only Vite plugin — so the whole app
+updates to match. Prefer chat? Run the **`/setup`** command in Claude Code, or
+**`/new-coder`** for a gentle orientation.
+
+Reuse the motion choices anywhere with the `<Reveal>` primitive:
+
+```tsx
+import { Reveal } from "@/studio/primitives/Reveal"
+
+<Reveal><Card>…</Card></Reveal> // fades/slides in on scroll, per the user's pick
+```
+
 ## Stack
 
 | Layer | Choice |
@@ -53,6 +99,15 @@ Built to be driven by Claude Code via the **`premium-ui`** orchestrator skill �
 src/
   components/ui/   # shadcn components (button, card, dialog, input)
   lib/utils.ts     # cn() helper
+  studio/          # Setup Studio walkthrough (wizard, presets, theme engine)
+    primitives/Reveal.tsx     # reveal-on-scroll, driven by the motion choice
+    studio.config.json        # saved choices (auto-written)
+  styles/
+    theme.generated.css       # CSS from the saved choices (auto-written)
   index.css        # Tailwind import + @theme tokens + fonts
-  App.tsx          # smoke-test page (replace with your app)
+  App.tsx          # welcoming landing page (replace with your app)
 ```
+
+The two auto-written files are the source of truth for the chosen look; edit them
+via Setup Studio or `/setup`, not by hand. `src/index.css` hands the
+studio-controlled tokens (fonts, accent, radius) over to `theme.generated.css`.
