@@ -2,8 +2,25 @@
 // Kept dependency-free so it can be imported from both the browser and the
 // Vite dev plugin (Node) without pulling in React or DOM types.
 
-export type FontPresetId = "geist-inter" | "inter" | "editorial" | "grotesk" | "system"
-export type ColorPresetId = "neutral" | "indigo" | "violet" | "emerald" | "rose" | "amber" | "sky"
+export type FontPresetId =
+  | "geist-inter"
+  | "inter"
+  | "editorial"
+  | "grotesk"
+  | "fraunces"
+  | "mono"
+  | "system"
+export type ColorPresetId =
+  | "neutral"
+  | "indigo"
+  | "violet"
+  | "emerald"
+  | "rose"
+  | "amber"
+  | "sky"
+  | "teal"
+  | "fuchsia"
+  | "lime"
 export type Mode = "light" | "dark"
 export type Density = "compact" | "cozy" | "comfortable"
 export type MotionFeel = "none" | "subtle" | "playful"

@@ -54,6 +54,22 @@ export const fontPresets: FontPreset[] = [
       "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap",
   },
   {
+    id: "fraunces",
+    name: "Fraunces + Inter",
+    blurb: "Soft, characterful serif headlines. Warm and crafted.",
+    heading: "'Fraunces', Georgia, serif",
+    body: "'Inter Variable', system-ui, sans-serif",
+    googleHref:
+      "https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&display=swap",
+  },
+  {
+    id: "mono",
+    name: "Mono + Inter",
+    blurb: "Code-like headings. Technical, distinctive, developer-flavored.",
+    heading: "ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace",
+    body: "'Inter Variable', system-ui, sans-serif",
+  },
+  {
     id: "system",
     name: "System native",
     blurb: "Uses the visitor's OS font. Fastest, zero downloads.",
@@ -133,6 +149,30 @@ export const colorPresets: ColorPreset[] = [
     swatch: "oklch(0.6 0.13 235)",
     light: { primary: "oklch(0.6 0.13 235)", primaryForeground: WHITE, ring: "oklch(0.6 0.13 235)" },
     dark: { primary: "oklch(0.72 0.13 235)", primaryForeground: INK, ring: "oklch(0.72 0.13 235)" },
+  },
+  {
+    id: "teal",
+    name: "Teal",
+    blurb: "Cool, modern, balanced. Pairs with anything.",
+    swatch: "oklch(0.6 0.12 195)",
+    light: { primary: "oklch(0.6 0.12 195)", primaryForeground: WHITE, ring: "oklch(0.6 0.12 195)" },
+    dark: { primary: "oklch(0.72 0.13 195)", primaryForeground: INK, ring: "oklch(0.72 0.13 195)" },
+  },
+  {
+    id: "fuchsia",
+    name: "Fuchsia",
+    blurb: "Vivid and confident. Stands out loud.",
+    swatch: "oklch(0.59 0.26 330)",
+    light: { primary: "oklch(0.59 0.26 330)", primaryForeground: WHITE, ring: "oklch(0.59 0.26 330)" },
+    dark: { primary: "oklch(0.69 0.22 330)", primaryForeground: WHITE, ring: "oklch(0.69 0.22 330)" },
+  },
+  {
+    id: "lime",
+    name: "Lime",
+    blurb: "Punchy and energetic. Best as a pop of accent.",
+    swatch: "oklch(0.75 0.18 130)",
+    light: { primary: "oklch(0.75 0.18 130)", primaryForeground: INK, ring: "oklch(0.75 0.18 130)" },
+    dark: { primary: "oklch(0.82 0.18 130)", primaryForeground: INK, ring: "oklch(0.82 0.18 130)" },
   },
 ]
 

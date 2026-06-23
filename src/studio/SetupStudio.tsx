@@ -4,8 +4,10 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  Copy,
   Palette,
   Rocket,
+  RotateCcw,
   Shapes,
   Sparkles,
   Type,
@@ -20,9 +22,10 @@ import { applyConfig, setAlwaysShow as persistAlwaysShow, getAlwaysShow } from "
 import { OptionCard, Segmented, Slider, SwatchButton, Toggle } from "./controls"
 import { PreviewMockup } from "./PreviewMockup"
 import { ScrollDemo } from "./ScrollDemo"
+import { buildThemeCss } from "./generateTheme"
 import { colorPresets, densityPresets, fontPresets, motionPresets } from "./presets"
 import { useStudio } from "./studio-context"
-import type { StudioConfig } from "./types"
+import { defaultConfig, type StudioConfig } from "./types"
 
 const steps = [
   { id: "welcome", label: "Welcome", icon: Sparkles },
@@ -112,14 +115,24 @@ export function SetupStudio() {
                 </p>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={handleClose}
-              aria-label="Close"
-              className="grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-            >
-              <X className="size-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setDraft(defaultConfig)}
+                title="Reset all choices to the defaults"
+                className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <RotateCcw className="size-3.5" /> Reset
+              </button>
+              <button
+                type="button"
+                onClick={handleClose}
+                aria-label="Close"
+                className="grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
           </div>
 
           {/* Progress */}
@@ -411,6 +424,11 @@ function FinishExtras({
         ))}
       </div>
 
+      <div className="flex flex-wrap justify-center gap-2">
+        <CopyButton label="Copy theme CSS" value={buildThemeCss(draft)} />
+        <CopyButton label="Copy config JSON" value={JSON.stringify(draft, null, 2)} />
+      </div>
+
       <p className="text-center text-xs text-muted-foreground">
         {savedToFiles === null
           ? null
@@ -429,6 +447,25 @@ function FinishExtras({
         Show Setup Studio every time the app starts
       </label>
     </div>
+  )
+}
+
+function CopyButton({ label, value }: { label: string; value: string }) {
+  const [copied, setCopied] = React.useState(false)
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      /* clipboard blocked — ignore */
+    }
+  }
+  return (
+    <Button variant="outline" size="sm" onClick={copy}>
+      {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+      {copied ? "Copied!" : label}
+    </Button>
   )
 }
 
