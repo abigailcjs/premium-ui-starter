@@ -1,65 +1,61 @@
 # Getting started (for new coders) 👋
 
-Welcome! This is a **starter pack** — a ready-made project for building good‑looking
-web apps. You don't need to know much to begin. The big idea: you make the
-look‑and‑feel decisions by **clicking**, and the project wires them up for you.
+Welcome! This is a **starter pack** for building good‑looking web apps — and it
+comes with a built‑in coach so you're never on your own.
 
-## 1. Run it (two commands)
+## The easiest way: let Claude walk you through it
 
-Open a terminal in this folder and type these, one at a time:
+Open this repo in **Claude Code** and just say:
+
+> "Help me build something."  *(or type `/build`)*
+
+Claude runs the **guided‑build** coach. Instead of deciding everything for you, it
+**offers a few options at each step and lets you pick** — what to build, how the
+pages are laid out, the fonts and colors, the components, the words, the motion.
+You choose, Claude does the typing, and you see it come together one step at a time.
+
+### You're in control of how much it asks
+
+There are two modes (you can switch anytime by saying *"switch to guided/auto"*):
+
+| Mode | What happens |
+|---|---|
+| **Guided** (default) | Claude proposes a few options at **every** step and waits for your pick. Best for learning. |
+| **Auto** | Claude picks sensible defaults and moves fast, only checking with you on the big stuff. |
+
+This preference is remembered for **all future builds** — it lives in
+`.claude/build-preferences.json`.
+
+## Want to see it in a browser too?
+
+You can also run the app and design the look visually:
 
 ```bash
-npm install      # downloads the building blocks — only needed once
+npm install      # downloads the building blocks — once
 npm run dev      # starts your app
 ```
 
-Then open the link it prints (usually **http://localhost:5173**) in your browser.
+Open the link it prints (usually **http://localhost:5173**). The **Setup Studio**
+pops up so you can pick fonts, color, corners and motion by clicking — previewed
+live. (Reopen it anytime from the ✨ wand button, bottom‑right.)
 
-## 2. Design your UI in Setup Studio ✨
+## Handy commands in Claude Code
 
-The first time you open the app, a friendly walkthrough called **Setup Studio**
-pops up. (You can reopen it anytime with the **✨ wand button** in the bottom‑right
-corner.) It walks you through the decisions every builder has to make:
-
-| Step | What you choose |
-|---|---|
-| **Fonts** | The personality of your text (headings + body). |
-| **Color** | An accent color, plus light or dark. |
-| **Corners & spacing** | Sharp or round corners, tight or airy spacing. |
-| **Motion & scroll** | How lively animations feel, reveal‑on‑scroll, smooth scroll. |
-
-Every change previews **live** as you click. When you're happy, press **Save my
-choices** and it writes them into the project for you. That's it — you designed
-your app's look without touching code.
-
-> Want it to greet you every time instead of just the first time? There's a
-> checkbox for that on the last step.
-
-## 3. Prefer to decide in chat?
-
-If you're using **Claude Code**, you can run these instead of clicking:
-
-- `/setup` — Claude walks you through the same choices and applies them.
-- `/new-coder` — a gentle, no‑jargon orientation if this is all new.
-
-## 4. Make your first change
-
-Open `src/App.tsx` and change the big heading text to anything you like. Save the
-file and watch the browser update instantly. 🎉 You just edited an app.
+- `/build` — start the guided, options‑at‑each‑step walkthrough.
+- `/setup` — jump straight to choosing the look & feel (fonts, color, corners, motion).
+- `/new-coder` — a gentle, no‑jargon orientation if this is all brand new.
 
 ## Where things live
 
 ```
+.claude/
+  skills/guided-build/   ← the build coach (proposes options, you pick)
+  build-preferences.json ← guided vs auto, remembered across builds
+  commands/              ← /build, /setup, /new-coder
 src/
-  App.tsx            ← the page you edit
-  components/ui/     ← prebuilt pieces (buttons, cards, inputs)
-  studio/            ← powers the Setup Studio walkthrough
-  styles/
-    theme.generated.css   ← your saved choices, as CSS (auto‑written)
-  studio/studio.config.json ← your saved choices, as data (auto‑written)
+  App.tsx                ← the page you edit
+  components/ui/          ← prebuilt pieces (buttons, cards, inputs)
+  studio/                 ← the visual Setup Studio + <Reveal> motion
 ```
 
-You never have to edit the two "saved choices" files by hand — Setup Studio (or
-`/setup`) keeps them in sync. But you *can* peek to see what your clicks produced.
-
-Have fun building. There's no wrong way to start. 💛
+Have fun building. There's no wrong way to start — and you'll always get to choose. 💛

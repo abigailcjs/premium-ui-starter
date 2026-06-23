@@ -2,12 +2,31 @@
 
 A reusable, premium-grade UI starter — opinionated, official-first, and pre-wired to be driven by Claude Code. Clone it (or use it as a template) and start building polished React UI immediately.
 
-> **New to coding?** Start with **[GETTING-STARTED.md](./GETTING-STARTED.md)**. Run `npm install && npm run dev`, open the app, and the **Setup Studio** walkthrough helps you choose fonts, color, corners and motion by clicking — then wires your choices into the project.
+> **New to coding?** Just hand this repo to Claude Code and say *"help me build something"* (or run **`/build`**). The bundled **guided-build skill** walks you through it and **proposes a few options at each step for you to pick** — it doesn't run off and decide for you. See **[GETTING-STARTED.md](./GETTING-STARTED.md)**.
 
-## Setup Studio — design your UI by clicking
+## Guided Build — Claude proposes, you pick
 
-A built-in, beginner-friendly walkthrough that turns the decisions a builder
-normally agonizes over into a few visual choices, previewed live:
+The repo ships a Claude Code skill (`.claude/skills/guided-build`) that turns Claude
+into a step-by-step **build coach**. Open the repo in Claude Code and it offers, at
+every decision, **2–4 concrete options with quick trade-offs** — what to build,
+sections, look & feel, components, copy, motion — and waits for your choice before
+building.
+
+A persistent **build mode** (in `.claude/build-preferences.json`) controls this for
+*all future builds*:
+
+- **Guided** (default) — always propose options and let you pick.
+- **Auto** — pick sensible defaults and move fast, pausing only on big decisions.
+
+Switch anytime by saying *"switch to guided/auto"*. A `SessionStart` hook reads the
+mode each session so the behavior sticks. Commands: **`/build`** (start the
+walkthrough), **`/setup`** (just look & feel), **`/new-coder`** (gentle orientation).
+
+## Setup Studio — the visual look & feel picker
+
+For the "look & feel" step, guided-build can hand off to **Setup Studio**: an
+in-app, point-and-click way to choose the same options visually, previewed live
+(or pick them in chat — your call). It covers:
 
 - **Fonts & type** — heading + body pairings.
 - **Color & theme** — accent color and light/dark.

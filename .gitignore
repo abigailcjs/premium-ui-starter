@@ -12,13 +12,12 @@ dist
 dist-ssr
 *.local
 
-# Agent tooling (skills are managed globally / reinstallable, not per-repo)
+# Agent tooling (installed/global skills are reinstallable, not vendored)...
 .agents/
-.claude/skills/
+.claude/skills/*
+# ...except the guided-build skill, which ships with this starter.
+!.claude/skills/guided-build
 skills-lock.json
-
-# Local "first run done" marker for the Setup Studio welcome hook
-.claude/.setup-complete
 
 # Editor directories and files
 .vscode/*

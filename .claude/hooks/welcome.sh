@@ -1,26 +1,28 @@
 #!/bin/sh
-# Greets a coder when a Claude Code session starts. Shows a full welcome the
-# first time (until they've designed their UI), then stays quiet/brief after.
-# Output is added to Claude's context, so it nudges Claude to help.
+# Runs on every Claude Code session start. Tells Claude the project's build mode
+# so guided-vs-auto behavior persists across all future builds, and points new
+# users at the way in. Output is added to Claude's context.
 
-marker=".claude/.setup-complete"
-
-if [ -f "$marker" ]; then
-  exit 0
+prefs=".claude/build-preferences.json"
+mode="guided"
+if [ -f "$prefs" ] && grep -q '"mode"[[:space:]]*:[[:space:]]*"auto"' "$prefs"; then
+  mode="auto"
 fi
 
-cat <<'EOF'
-👋 Welcome to the premium-ui-starter — a starter pack for new coders.
+echo "👋 premium-ui-starter — a guided starter for building UI (great for new coders)."
+echo
 
-This project has a friendly walkthrough (Setup Studio) that lets the user pick
-their app's fonts, color, corner roundness, and motion by clicking — no config.
+if [ "$mode" = "auto" ]; then
+  echo "Build mode: AUTO. When the user wants to build/design/extend the app, use the"
+  echo "guided-build skill but pick sensible defaults and move fast, pausing only at"
+  echo "high-impact decisions. The user can say \"switch to guided\" to change this."
+else
+  echo "Build mode: GUIDED. When the user wants to build/design/extend the app, use the"
+  echo "guided-build skill: at EACH decision, propose 2-4 concrete options with quick"
+  echo "trade-offs (mark a recommended one) and wait for their pick before building."
+  echo "The user can say \"switch to auto\" to change this (update $prefs)."
+fi
 
-Good things to offer the user right now:
-  • Run `npm install` then `npm run dev`, open http://localhost:5173, and the
-    Setup Studio pops up on first launch (or via the ✨ wand, bottom-right).
-  • Or run the `/setup` command to walk through the choices together in chat.
-  • Brand new to coding? The `/new-coder` command gives a gentle orientation.
-
-Once they've designed their UI, create the file `.claude/.setup-complete` so this
-welcome stops showing.
-EOF
+echo
+echo "Ways in: /build (guided walkthrough) · /setup (just look & feel) · /new-coder"
+echo "(gentle orientation). The build mode lives in $prefs."
