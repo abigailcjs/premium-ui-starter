@@ -17,6 +17,9 @@ dist-ssr
 .claude/skills/
 skills-lock.json
 
+# Local "first run done" marker for the Setup Studio welcome hook
+.claude/.setup-complete
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

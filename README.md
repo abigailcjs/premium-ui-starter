@@ -2,6 +2,33 @@
 
 A reusable, premium-grade UI starter — opinionated, official-first, and pre-wired to be driven by Claude Code. Clone it (or use it as a template) and start building polished React UI immediately.
 
+> **New to coding?** Start with **[GETTING-STARTED.md](./GETTING-STARTED.md)**. Run `npm install && npm run dev`, open the app, and the **Setup Studio** walkthrough helps you choose fonts, color, corners and motion by clicking — then wires your choices into the project.
+
+## Setup Studio — design your UI by clicking
+
+A built-in, beginner-friendly walkthrough that turns the decisions a builder
+normally agonizes over into a few visual choices, previewed live:
+
+- **Fonts & type** — heading + body pairings.
+- **Color & theme** — accent color and light/dark.
+- **Corners & spacing** — corner roundness and density.
+- **Motion & scroll** — animation feel, reveal-on-scroll, smooth scroll.
+
+It **opens automatically on first run** (re-open anytime from the ✨ wand button;
+opt into "show every launch" on the last step). Pressing **Save** writes your
+choices to `src/studio/studio.config.json` and regenerates
+`src/styles/theme.generated.css` via a dev-only Vite plugin — so the whole app
+updates to match. Prefer chat? Run the **`/setup`** command in Claude Code, or
+**`/new-coder`** for a gentle orientation.
+
+Reuse the motion choices anywhere with the `<Reveal>` primitive:
+
+```tsx
+import { Reveal } from "@/studio/primitives/Reveal"
+
+<Reveal><Card>…</Card></Reveal> // fades/slides in on scroll, per the user's pick
+```
+
 ## Stack
 
 | Layer | Choice |
@@ -53,6 +80,15 @@ Built to be driven by Claude Code via the **`premium-ui`** orchestrator skill �
 src/
   components/ui/   # shadcn components (button, card, dialog, input)
   lib/utils.ts     # cn() helper
+  studio/          # Setup Studio walkthrough (wizard, presets, theme engine)
+    primitives/Reveal.tsx     # reveal-on-scroll, driven by the motion choice
+    studio.config.json        # saved choices (auto-written)
+  styles/
+    theme.generated.css       # CSS from the saved choices (auto-written)
   index.css        # Tailwind import + @theme tokens + fonts
-  App.tsx          # smoke-test page (replace with your app)
+  App.tsx          # welcoming landing page (replace with your app)
 ```
+
+The two auto-written files are the source of truth for the chosen look; edit them
+via Setup Studio or `/setup`, not by hand. `src/index.css` hands the
+studio-controlled tokens (fonts, accent, radius) over to `theme.generated.css`.

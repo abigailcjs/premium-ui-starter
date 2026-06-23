@@ -1,0 +1,10 @@
+{
+  "font": "geist-inter",
+  "color": "neutral",
+  "mode": "light",
+  "radius": 0.625,
+  "density": "cozy",
+  "motion": "subtle",
+  "revealOnScroll": true,
+  "smoothScroll": true
+}
