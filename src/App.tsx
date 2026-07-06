@@ -1,53 +1,49 @@
+import { lazy, Suspense } from "react"
 import { motion } from "motion/react"
-import { Rocket, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card"
+import { MousePointerClick, Orbit } from "lucide-react"
 
-const stack = [
-  "Vite 8 (Rolldown)",
-  "React 19 + TypeScript",
-  "Tailwind v4",
-  "shadcn/ui (Nova)",
-  "Lucide · Motion · GSAP",
-]
+import { LiquidGlass } from "@/components/fx"
+
+const HeroScene = lazy(() => import("@/components/three/HeroScene"))
 
 function App() {
   return (
-    <div className="min-h-svh flex items-center justify-center bg-background text-foreground p-6">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <Rocket className="size-5 text-primary" />
-              <CardTitle>Foundation ready</CardTitle>
+    <div className="dark relative isolate min-h-svh overflow-hidden bg-[#0b1020] text-foreground">
+      {/* Full-bleed interactive 3D scene — lazy so three.js stays code-split. */}
+      <div className="absolute inset-0">
+        <Suspense
+          fallback={
+            <div className="grid min-h-svh place-items-center text-sm text-white/50">
+              Loading scene…
             </div>
-            <CardDescription>
-              Premium UI stack scaffolded and wired.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <ul className="space-y-2 text-sm">
-              {stack.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check className="size-4 text-primary" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Button className="w-full">Looks good</Button>
-          </CardContent>
-        </Card>
-      </motion.div>
+          }
+        >
+          <HeroScene />
+        </Suspense>
+      </div>
+
+      {/* Caption overlay */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center p-6">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+        >
+          <LiquidGlass radius={16} className="pointer-events-auto px-4 py-2.5">
+            <div className="flex items-center gap-4 text-sm text-white/85">
+              <span className="flex items-center gap-1.5">
+                <Orbit className="size-4 text-violet-300" />
+                Drag to orbit
+              </span>
+              <span className="h-3.5 w-px bg-white/20" />
+              <span className="flex items-center gap-1.5">
+                <MousePointerClick className="size-4 text-violet-300" />
+                Click the knot to morph
+              </span>
+            </div>
+          </LiquidGlass>
+        </motion.div>
+      </div>
     </div>
   )
 }
